@@ -1,0 +1,30 @@
+<%- include ('partials/header.ejs'); -%>
+<!-- FLOATING PROFILE VIEWER -->
+<% if(locals.profile) {%> 
+<section id="bottom" class="bottom">    
+    <div class="card" style="width: 18rem;">
+       
+        <a href="/display?user=<%=ogUSER%>&item=<%=userID%>&post=<%=postID%>">
+            <span class="material-symbols-outlined">
+                cancel
+            </span>
+            </a>
+        <div class="card-body">
+          <h5 class="card-title"> Username :<%=profile.username%></h5>
+          <h6>Total posts : <%=profile.total%></h6>
+
+             <% if(locals.post) { %>
+                <h6>Posts: </h6>
+                 <%post.forEach(function(f){ %>
+                    <div class="card">
+                        <div class="card-body">
+                         <%=f.content%>
+                        </div>
+                    </div>
+                <% }) %>
+            <% } %>  
+        </div>
+      </div>
+</section>
+<% } %>
+

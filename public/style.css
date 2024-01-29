@@ -1,0 +1,94 @@
+*{
+  
+  font-family: "Raleway", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 438;
+  font-style: normal;
+}
+
+#navbar {
+    
+    background-color: rgb(18,4,96);
+    justify-items: center;
+}
+#navbar > a{
+   
+    color: rgb(202,228,246);
+}
+#navbar > a:hover{
+     color: aliceblue;
+}
+#bottom{
+    background-color: rgb(202,228,246);
+    padding: 10px;
+}
+#bottom > a{
+    color:rgb(234,167,156);
+}
+#pagefooter{
+    margin-bottom: 0px;
+    justify-items: center;
+    color: rgb(202,228,246);
+    background-color: rgb(18,4,96);
+}
+  img{
+    width: 10%;
+    height: 10%;
+}
+ul{
+    list-style-type: none;
+}
+#bg-1 > img{
+    margin-top: 2px;
+    width: 100%;
+    height: 100%;
+}
+.promo-title{
+    color: rgb(18,4,96);
+    margin: 3em 3px 3px 35px;
+    padding: 4px;
+    font-size: 2em;
+    font-style: bold;
+}
+.info{
+    margin: 3px 3px 3px 35px;
+    font-size: 1em;
+}
+#comment{
+    background-color: rgb(202,228,246);
+}
+#create{
+   padding: 9px;
+}
+#postcard{
+    margin-top: 2px;
+    margin-bottom: 2px;
+    
+}
+.card{
+    border-radius: 20px;
+    background-color: rgb(234,167,156);
+}
+.card > input{
+    border-radius: 20px;
+}
+#viewcomments > a{
+    color: rgb(18,4,96);
+}
+
+.text{
+    color: black;
+     border: none; 
+     outline : none; 
+}
+#content{
+    padding: 3px;
+}
+.bottom{
+    width: 100%;
+    height: 100vh;
+}
+#commentsection{
+    border: 2px solid aliceblue;
+    padding: 14px;
+}

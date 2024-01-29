@@ -1,0 +1,141 @@
+<%- include ('partials/header.ejs'); -%>
+<section id="bottom">
+
+    <!-- CREATE A POST -->
+<div class="container" id="create">     
+  <form action="/create" method="post">
+    <div class="input-group mb-3" id="createpost">
+        <div class="input-group-prepend">
+          <button class=" btn btn-primary btn-outline-secondary" type="button" onclick="showdiv()">
+            <span class="material-symbols-outlined">
+            add_circle
+            </span>
+        </button>
+        </div>
+        <input type="input" class="form-control" placeholder="Add post ..." aria-label="" aria-describedby="basic-addon1" onclick="showdiv()">
+        
+    </div>
+        <input type="hidden" name="ogUSER" value="<%=ogUSER%>" />
+      <div class="collapse" id="collapseExample">
+          <textarea name="content" id="" cols="133" rows="10"></textarea>
+          <button class="btn btn-primary" onclick="addDate()" >Create Post</button>
+      </div>    
+  </form>
+</div> 
+
+
+<!-- ERROR IF ANY -->
+<% if(locals.error) {%> 
+  <div class="mb-3"><%=error%></div>
+<% } %>
+
+<!-- COMMENT SECTION -->
+
+<% if(locals.comments) { %>
+  <div class="container" id="commentsection">         
+    <h2 class="">COMMENT SECTION</h2>
+                <div class="row" id="viewcomments">  
+                <% comments.forEach( function(comment){ %>
+                    
+                    <div class="col-sm-2" >
+                        <div class="card" style="width: 100%;" >
+                            <div class="card-body">
+                                <h5 class="card-title"> <%=comment.comment %></h5>
+                                <h6 class="card-subtitle mb-2 text-muted">by <%=comment.username%></h6>    
+                            </div>  
+                        </div>  
+                    </div>
+                  <%}) %>
+                  <button onclick="closeComment()" class="btn btn-link">
+                  <span class="material-symbols-outlined">
+                      cancel
+                  </span>
+              </button>
+              <%} %>
+            </div>   
+          
+    </div> 
+
+
+<!-- ALL POSTS BY ALL USERS -->
+
+<% if(locals.post) {%>
+<div class="container">
+<% post.forEach(function(item){ %>
+ 
+<div class="row" id="postcard">
+    <div class="col-md">
+        <div class="card" style="width: 60%;">
+            <div class="card-body">
+              <h6 class="card-title mb-2 text-muted">
+                <form action="/profile" method="POST">
+                     <!-- VIEW PROFILE BUTTON -->
+                    <button class="btn btn-link"  type="submit" > <span class="material-symbols-outlined" >
+                        face
+                    </span></button>
+                    <input type="hidden" name="user" value="<%=ogUSER%>"/>
+                    <input type="hidden" name="item" value="<%=item.user_id%>"/>
+                    <input type="hidden" name="post" value="<%=item.post_id%>"/>
+                    created by <%=item.username%>
+                </form>
+               
+               
+              </h6> 
+            <p class="card-text">
+                <!-- EDIT THE POST AFTER OUTSIDE EDIT BUTTON CLICKED-->
+            <form action="/edit" method="post">
+                <div id="contentu<%=item.user_id%>p<%=item.post_id%>" class="content"><%=item.content%></div>
+                <textarea type="text" class="d-none"  id="editpostu<%=item.user_id%>p<%=item.post_id%>" name="edit" style="background-color: rgb(234,167,156); color:rgb(183, 241, 222);" ><%=item.content%></textarea>
+                <input type="hidden" name="user" value="<%=ogUSER%>"/>
+                <input type="hidden" name="item" value="<%=item.user_id%>"/>
+                <input type="hidden" name="post" value="<%=item.post_id%>"/>
+                <button type="submit" class="d-none" onclick="showInput(`u<%=item.user_id%>p<%=item.post_id%>`)" id="editbuttonu<%=item.user_id%>p<%=item.post_id%>">edit</button>
+            </form>
+            </p>    
+        <!-- GET ALL COMMENTS UNDER POST -->
+            <form action="/showcomment" method="POST">
+                 <!-- DELETE A POST -->
+                <a href="/delete?post=<%=item.post_id%>&user=<%=ogUSER%>&item=<%=item.user_id%>" >
+                  <span class="material-symbols-outlined">
+                    delete
+                  </span>
+                 </a>
+
+             <!-- EDIT THE POST  -->
+                <button class=" btn btn-link" onclick="showInput(`u<%=item.user_id%>p<%=item.post_id%>`)" type="button">
+                  <span class="material-symbols-outlined">
+                    edit
+                  </span>
+               </button>  
+             <!-- SHOW COMMENTS -->
+                <button class="btn btn-link"type="submit" onclick="closeComment()">
+                    <span class="material-symbols-outlined">
+                        comment
+                    </span>
+                </button>
+               <input type="hidden" name="user" value="<%=ogUSER%>"/>
+               <input type="hidden" name="item" value="<%=item.user_id%>"/>
+               <input type="hidden" name="post" value="<%=item.post_id%>"/>   
+            </form>
+         <!-- WRITE YOUR COMMENT -->
+            <form action="/comment" method="POST">     
+                <textarea name="comment" id="content" cols="15" rows="1" placeholder="Add your thoughts" class="form-control"></textarea>
+               <input type="hidden" name="item" value="<%=item.user_id%>" />
+               <input type="hidden"  name="postID" value="<%=item.post_id%>"/>
+               <input type="hidden" name="ogUSER" value="<%=ogUSER%>" />
+               <button class="btn btn-link" type ="submit">
+                <span class="material-symbols-outlined">
+                    add_comment
+                </span>
+               </button>
+             </form>
+            </div> 
+        </div>
+     </div>
+</div>
+<% }) %>
+</div>  
+ <% } %>
+
+</section>
+ <%- include('partials/footer.ejs'); -%>
